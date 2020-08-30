@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  goldfig:
+    image: goldfig/goldfig:latest
+    init: true
+    environment:
+      - GOLDFIG_DB_HOST=db
+      - GOLDFIG_DB_SU_USER=postgres
+      - GOLDFIG_DB_SU_PASSWORD=postgres
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+  db:
+    image: clkao/postgres-plv8
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  pg_data:
+    driver: local
