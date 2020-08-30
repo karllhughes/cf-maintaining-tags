@@ -1,0 +1,11 @@
+policies:
+
+- name: ec2-tag-compliance-report
+  resource: ec2
+  comment: Report on ec2 instances without required tags
+  filters:
+    - or:
+        - "tag:contact": absent
+        - "tag:env": absent
+        - "tag:service": absent
+        - "tag:accessLevel": absent

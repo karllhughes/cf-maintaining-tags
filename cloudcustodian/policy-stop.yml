@@ -1,0 +1,24 @@
+policies:
+
+- name: ec2-tag-compliance-stop
+  resource: ec2
+  comment: Stop ec2 instances without required tags
+  filters:
+    - or:
+        - "tag:contact": absent
+        - "tag:env": absent
+        - "tag:service": absent
+        - "tag:accessLevel": absent
+  actions:
+    - stop
+
+- name: ec2-tag-compliance-start
+  resource: ec2
+  comment: Start ec2 instances when they have all required tags
+  filters:
+    - "tag:contact": present
+    - "tag:env": present
+    - "tag:service": present
+    - "tag:accessLevel": present
+  actions:
+    - start
