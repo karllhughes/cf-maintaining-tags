@@ -5,7 +5,12 @@ policies:
   comment: Report on ec2 instances without required tags
   filters:
     - or:
-        - "tag:contact": absent
-        - "tag:env": absent
-        - "tag:service": absent
-        - "tag:accessLevel": absent
+      - "tag:env": empty
+      - type: value
+        key: "tag:contact"
+        op: ni 
+        value: ["j-mark", "l-duke"]
+      - type: value
+        key: "tag:service"
+        op: ni 
+        value: ["cart", "search"]
